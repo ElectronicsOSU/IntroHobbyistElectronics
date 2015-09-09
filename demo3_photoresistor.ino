@@ -1,28 +1,21 @@
-/*
-  AnalogReadSerial
-  Reads an analog input on pin A3, prints the result to the serial monitor.
-  Attach the center pin of a potentiometer to pin A3, and the outside pins to ~3V and ground.
-  
-  Hardware Required:
-  * MSP-EXP430G2 LaunchPad
-  * 10-kilohm Potentiometer
-  * hook-up wire
 
-  This example code is in the public domain.
-*/
+const int cdsPin = A5; //this is also pin 7. 'A5' is a pre-defined cosntant for Energia
 
-// the setup routine runs once when you press reset:
+int sensorValue = 0; 
+
 void setup() {
   // initialize serial communication at 9600 bits per second:
-  Serial.begin(9600); // msp430g2231 must use 4800
+  Serial.begin(9600);
 }
 
-// the loop routine runs over and over again forever:
+
 void loop() {
-  // read the input on analog pin A3:
-  int sensorValue = analogRead(A5);
-  // print out the value you read:
+  // read the analog light intensity
+  sensorValue = analogRead(cdsPin);
+  
+   // print out the value you read:
   Serial.print("Photoresistor Level: ");
-  Serial.println(sensorValue);
-  delay(1); // delay in between reads for stability
+  // the value will be somewhere between 0 and 1023 for 10-bit analog to digital conversion
+  Serial.println(sensorValue); 
+  delay(10); 
 }
