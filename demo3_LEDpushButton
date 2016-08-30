@@ -1,0 +1,28 @@
+// These constants won't change.  They're used to give names
+// to the pins used:
+const int LED = 2;
+const int LEDButton = 6;     // the number of the pushbutton pin of the breadboarded button
+
+//will keep track of the Pulse Width Modulated 
+int PWMvalue = 0;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+ 
+  //determine if the key button was pushed:
+  if(digitalRead(LEDButton))
+  {
+     //update the level of brightness of the LED
+     PWMvalue = PWMvalue + 51;
+     
+     //if the brightness level is greater than the max brightness, reset it to 0.
+     if(PWMvalue > 255){ 
+         PWMvalue = 0; 
+      }
+  }
+  
+  analogWrite(LED, PWMvalue);                  
+}
